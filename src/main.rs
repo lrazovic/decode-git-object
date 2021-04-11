@@ -19,22 +19,30 @@ fn main() {
         )
         .get_matches();
     let filename = matches.value_of("file").unwrap();
-    let stream = File::open(&Path::new(filename)).unwrap();
-    let mut decompressed = Vec::new();
-    match zlib::Decoder::new(stream).read_to_end(&mut decompressed) {
-        Ok(_) => {
-            let obj = String::from_utf8(decompressed);
-            match obj {
-                Ok(str) => {
-                    println!("{}", str)
-                }
-                Err(_) => {
-                    eprintln!("Eror in UTF-8 Decoding")
-                }
-            }
+    let file: File;
+    let stream = File::open(&Path::new(filename));
+    match stream {
+        Ok(data) => file = data,
+        Err(err) => {
+            eprintln!("{}", err);
+            std::process::exit(1)
         }
-        Err(_) => {
-            eprintln!("Error in Zlib Decompressing")
+    }
+    let mut decompressed = Vec::new();
+    match zlib::Decoder::new(file).read_to_end(&mut decompressed) {
+        Ok(_) => match String::from_utf8(decompressed) {
+            Ok(str) => {
+                println!("{}", str);
+                std::process::exit(0)
+            }
+            Err(err) => {
+                eprintln!("{}", err);
+                std::process::exit(1)
+            }
+        },
+        Err(err) => {
+            eprintln!("{}", err);
+            std::process::exit(1);
         }
     }
 }
