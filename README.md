@@ -6,7 +6,7 @@ A small utility that decodes a Git object, mainly useful for forensics, recovery
 
 ```
 $ cargo install --git https://github.com/lrazovic/decode-git-object
-$ decode-git-object --file <file>
+$ decode-git-object <file>
 ```
 
 Inspired by [get-git-object](https://github.com/b1fair/get-git-object) by @b1fair

@@ -8,12 +8,10 @@ fn main() {
     let matches = App::new("Decode Git Object")
         .version("0.1.0")
         .author("Leonardo Razovic <lrazovic@gmail.com>")
-        .about("Teaches argument parsing")
+        .about("A simple tool to decode git objects")
         .arg(
             Arg::with_name("file")
                 .required(true)
-                .short("f")
-                .long("file")
                 .takes_value(true)
                 .help("The object file to decode"),
         )
