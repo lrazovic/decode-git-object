@@ -1,6 +1,6 @@
 # decode-git-object
 
-A small utility that decodes a Git object, mainly useful for forensics, recovery, and CTF challenges.
+A small utility that decodes git objects, mainly useful for forensics, recovery, and CTF challenges.
 
 ## How to use
 
